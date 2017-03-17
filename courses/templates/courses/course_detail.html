@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load humanize course_extras %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+    <div class="row columns">
+        {{ block.super }}
+        <article>
+            <h1 class="">{{ course.title }}</h1>
+
+            <div class="callout secondary">
+                {{ course.description|markdown_to_html|safe }}
+            </div>
+
+            <dl>
+                {% for step in course.step_set.all %}
+                    <dt>
+                        <a href="{% url 'courses:step' course_pk=course.pk step_pk=step.pk %}">{{ step.title }}</a>
+                    </dt>
+                    <dd>{{ step.description|markdown_to_html|safe }}</dd>
+                {% endfor %}
+            </dl>
+        </article>
+    </div>
+{% endblock %}
