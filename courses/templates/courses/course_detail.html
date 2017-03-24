@@ -14,9 +14,9 @@
             </div>
 
             <dl>
-                {% for step in course.step_set.all %}
+                {% for step in steps %}
                     <dt>
-                        <a href="{% url 'courses:step' course_pk=course.pk step_pk=step.pk %}">{{ step.title }}</a>
+                        <a href="{{ step.get_absolute_url }}">{{ step.title }}</a>
                     </dt>
                     <dd>{{ step.description|markdown_to_html|safe }}</dd>
                 {% endfor %}
